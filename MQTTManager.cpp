@@ -2,16 +2,17 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "ValveController.h"
+#include "config.h"
 
 extern ValveController valve;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-const char* mqtt_server = "192.168.0.114";
-const char* topic = "sprinkler/mastervalve";
+const char* mqtt_server = MQTT_SERVER;
+const char* mqtt_topic = "sprinkler/mastervalve";
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* receivedTopic, byte* payload, unsigned int length) {
   String msg = "";
   for (unsigned int i = 0; i < length; i++) {
     msg += (char)payload[i];
@@ -27,7 +28,7 @@ void reconnect() {
     Serial.print("Attempting MQTT connection...");
     if (client.connect("ESP32_MasterValve")) {
       Serial.println("connected");
-      client.subscribe(topic);
+      client.subscribe(mqtt_topic);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
