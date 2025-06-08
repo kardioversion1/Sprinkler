@@ -1,0 +1,15 @@
+# Build outputs
+*.elf
+*.bin
+*.hex
+
+# Temporary files
+*.tmp
+*.temp
+*~
+*.swp
+.DS_Store
+
+# Archives
+*.zip
+
