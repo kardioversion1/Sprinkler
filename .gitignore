@@ -1,0 +1,17 @@
+# Build artifacts
+*.elf
+*.bin
+*.hex
+*.o
+
+# Arduino build folder
+build/
+
+# User config
+config.h
+
+# OS files
+.DS_Store
+
+# Archives
+*.zip
