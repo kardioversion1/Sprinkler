@@ -9,6 +9,7 @@ Watchdog watchdog;
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("Master Valve starting...");
   WiFiManager::connect();
   valve.begin();
   mqtt.begin();
@@ -19,4 +20,5 @@ void loop() {
   mqtt.loop();
   valve.update();
   watchdog.feed();
+  delay(10);
 }
