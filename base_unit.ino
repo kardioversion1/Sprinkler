@@ -1,9 +1,7 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include "config.h"
 
-const char* ssid = "Artemis";
-const char* password = "Gocards1";
-const char* mqtt_server = "192.168.0.114";
 const char* topic = "sprinkler/mastervalve";
 
 #define VALVE_SENSOR_PIN 25
@@ -13,7 +11,7 @@ PubSubClient client(espClient);
 
 void setup_wifi() {
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -36,7 +34,7 @@ void reconnect() {
 
 void setup() {
   setup_wifi();
-  client.setServer(mqtt_server, 1883);
+  client.setServer(MQTT_SERVER, 1883);
   pinMode(VALVE_SENSOR_PIN, INPUT);
 }
 

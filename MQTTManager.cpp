@@ -2,13 +2,13 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "ValveController.h"
+#include "config.h"
 
 extern ValveController valve;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-const char* mqtt_server = "192.168.0.114";
 const char* topic = "sprinkler/mastervalve";
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -38,7 +38,7 @@ void reconnect() {
 }
 
 void MQTTManager::begin() {
-  client.setServer(mqtt_server, 1883);
+  client.setServer(MQTT_SERVER, 1883);
   client.setCallback(callback);
 }
 
